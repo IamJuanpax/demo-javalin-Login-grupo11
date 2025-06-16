@@ -20,8 +20,13 @@ public class PostMascotaHandler implements Handler {
         Mascota mascota = context.bodyAsClass(Mascota.class);
         System.out.println("Creando mascota: " + bodyString);
         System.out.println(mascota);
-        validarNuevaMascota(mascota);
-        context.status(201);
+        try {
+            validarNuevaMascota(mascota);
+            context.status(201);
+        }
+        catch (IllegalArgumentException e) {
+            context.status(400).result(e.getMessage());
+        }
     }
 
     private void validarNuevaMascota(Mascota mascota) {

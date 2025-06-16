@@ -2,7 +2,6 @@ package com.example.javalin.modelo;
 
 import java.util.List;
 
-// Comiteo algo
 public class Dueño {
 
     private Integer id;
