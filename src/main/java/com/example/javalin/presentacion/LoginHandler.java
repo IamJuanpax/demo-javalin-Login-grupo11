@@ -23,8 +23,7 @@ public class LoginHandler implements Handler {
         LoginRequest loginRequest = context.bodyAsClass(LoginRequest.class);
 
         // Validación de los datos ingresados (algo simple)
-        if (loginRequest.getUsername() == null || loginRequest.getUsername().isBlank() ||
-                loginRequest.getPassword() == null || loginRequest.getPassword().isBlank()) {
+        if (loginRequest.getUsername() == null) {
             throw new IllegalArgumentException("El nombre de usuario y la contraseña no pueden estar vacíos");
         }  // La excepcion se va mostrar en el archivo Application.java
 
