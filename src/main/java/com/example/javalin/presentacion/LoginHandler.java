@@ -22,8 +22,19 @@ public class LoginHandler implements Handler {
 
         LoginRequest loginRequest = context.bodyAsClass(LoginRequest.class);
 
-        Dueño dueño = repoDueños.obtenerJose(); //hardcode: siempre loguea a Jose
-        System.out.println("Login: " + loginRequest);
+        // Validación de los datos ingresados (algo simple)
+        if (loginRequest.getUsername() == null || loginRequest.getUsername().isBlank() ||
+                loginRequest.getPassword() == null || loginRequest.getPassword().isBlank()) {
+            throw new IllegalArgumentException("El nombre de usuario y la contraseña no pueden estar vacíos");
+        }  // La excepcion se va mostrar en el archivo Application.java
+
+        // Modifique esto para que reciba y de el nombre del dueño que se esta creando (pasado por parametro)
+        Dueño dueño = new Dueño();
+        dueño.setNombre(loginRequest.getUsername());
+        dueño.setPassword(loginRequest.getPassword());
+
+        // Devuelve el nombre del dueño creado y el objeto dueño con los parametros enviados
+        System.out.println("Login: " + loginRequest.getUsername());
         System.out.println("Login: " + dueño);
 
         SesionManager sesionManager = SesionManager.get();
