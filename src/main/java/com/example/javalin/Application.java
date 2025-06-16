@@ -21,6 +21,7 @@ public class Application {
 
         app.exception(IllegalArgumentException.class, (e, ctx) -> {
             //tratar excepcion
+            throw new IllegalArgumentException("Ha habido un error de tipo: " + e.getMessage());
         });
 
 
