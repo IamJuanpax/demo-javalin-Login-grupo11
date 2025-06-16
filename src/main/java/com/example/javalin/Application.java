@@ -20,12 +20,10 @@ public class Application {
         app.post("/api/login", new LoginHandler());
 
         app.exception(IllegalArgumentException.class, (e, ctx) -> {
-            //tratar excepcion
-            throw new IllegalArgumentException("Ha habido un error de tipo: " + e.getMessage());
+            ctx.status(400).result("Ha habido un error de tipo: " + e.getMessage());
         });
 
 
     }
-
 
 }
