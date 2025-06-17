@@ -44,4 +44,14 @@ public class RepositorioDueños {
         jose.setMascotas(asList(mimi));
         return jose;
     }
+    public Dueño obtenerUsuario(String username, String password){
+        // Validación de los datos ingresados (algo simple)
+        if (username == null || password == null){
+            throw new IllegalArgumentException("El nombre de usuario y la contraseña no pueden estar vacíos");
+        }
+        Dueño dueño = new Dueño();
+        dueño.setNombre(username);
+        dueño.setPassword(password);
+        return dueño;
+    }
 }

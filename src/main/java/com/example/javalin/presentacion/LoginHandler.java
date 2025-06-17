@@ -18,19 +18,9 @@ public class LoginHandler implements Handler {
 
     @Override
     public void handle(@NotNull Context context) throws Exception {
-        //validamos user/pass y buscamos datos de ese usuario para agregar en la sesión
-
         LoginRequest loginRequest = context.bodyAsClass(LoginRequest.class);
 
-        // Validación de los datos ingresados (algo simple)
-        if (loginRequest.getUsername() == null) {
-            throw new IllegalArgumentException("El nombre de usuario y la contraseña no pueden estar vacíos");
-        }  // La excepcion se va mostrar en el archivo Application.java
-
-        // Modifique esto para que reciba y de el nombre del dueño que se esta creando (pasado por parametro)
-        Dueño dueño = new Dueño();
-        dueño.setNombre(loginRequest.getUsername());
-        dueño.setPassword(loginRequest.getPassword());
+        Dueño dueño = this.repoDueños.obtenerUsuario(loginRequest.getUsername(), loginRequest.getPassword());
 
         // Devuelve el nombre del dueño creado y el objeto dueño con los parametros enviados
         System.out.println("Login: " + loginRequest.getUsername());
@@ -38,9 +28,6 @@ public class LoginHandler implements Handler {
 
         SesionManager sesionManager = SesionManager.get();
         String idSesion = sesionManager.crearSesion("dueño", dueño);
-
-//        sesionManager.agregarAtributo(idSesion, "fechaInicio", new Date());
-//        sesionManager.agregarAtributo(idSesion, "rol", repoRoles.getByUser(idUser));
 
         context.json(new LoginResponse(idSesion));
 
